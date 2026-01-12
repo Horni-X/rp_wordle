@@ -1,1 +1,1 @@
-# rp_wordle
+# Rocikova prace
