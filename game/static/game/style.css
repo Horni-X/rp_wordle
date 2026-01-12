@@ -1,7 +1,7 @@
 body {
     background-color: #121213;
     color: white;
-    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -15,16 +15,11 @@ body {
     align-items: center;
 }
 
-h1 {
-    font-size: 2.5rem;
-    letter-spacing: 0.2rem;
-    margin-bottom: 20px;
-}
-
 .grid {
     display: flex;
     flex-direction: column;
     gap: 5px;
+    margin-bottom: 20px;
 }
 
 .row {
@@ -43,41 +38,38 @@ h1 {
     font-size: 2rem;
     font-weight: bold;
     text-transform: uppercase;
-    transition: background-color 0.5s;
 }
 
-/* Barvy Wordle */
-.correct { background-color: #538d4e !important; border: none !important; }
-.present { background-color: #b59f3b !important; border: none !important; }
-.absent  { background-color: #3a3a3c !important; border: none !important; }
+/* Barvy výsledků */
+.correct { background-color: #538d4e; border: none; }
+.present { background-color: #b59f3b; border: none; }
+.absent  { background-color: #3a3a3c; border: none; }
 
-/* Animace otočení */
-.flip {
-    transform: rotateX(360deg);
-    transition: transform 1.5s;
-}
-
-.input-area {
+.keyboard {
     margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
 }
 
-input {
-    background: transparent;
-    border: 1px solid #3a3a3c;
-    color: white;
-    padding: 10px;
-    font-size: 1.2rem;
-    text-align: center;
+.keyboard-row {
+    display: flex;
+    gap: 6px;
+}
+
+.key {
+    width: 40px;
+    height: 58px;
     border-radius: 4px;
-}
-
-button {
     background-color: #818384;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 1.2rem;
     cursor: pointer;
-    border-radius: 4px;
-    margin-left: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
 }
+
+.input-area { margin-bottom: 20px; }
+input { padding: 10px; font-size: 1.2rem; background: #121213; color: white; border: 1px solid #3a3a3c; }
+button { padding: 10px 20px; font-size: 1.2rem; cursor: pointer; background: #818384; color: white; border: none; }

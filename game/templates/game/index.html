@@ -3,7 +3,6 @@
 <html lang="cs">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Django Wordle</title>
     <link rel="stylesheet" href="{% static 'game/style.css' %}">
 </head>
@@ -12,81 +11,21 @@
     <div class="game-container">
         <h1>WORDLE</h1>
         
-        <div class="grid" id="grid">
-            </div>
+        <div class="grid" id="grid"></div>
 
         <div class="input-area">
             <input type="text" id="guessInput" maxlength="5" autocomplete="off" placeholder="Napiš slovo...">
             <button id="submitBtn">HÁDAT</button>
         </div>
+
+        <div id="keyboard" class="keyboard"></div>
     </div>
 
     <script>
         const csrftoken = "{{ csrf_token }}";
-        const grid = document.getElementById('grid');
-        const input = document.getElementById('guessInput');
-        const btn = document.getElementById('submitBtn');
-        let currentRow = 0;
-
-        // 1. Generování mřížky (6 řádků po 5 sloupcích)
-        for (let r = 0; r < 6; r++) {
-            const row = document.createElement('div');
-            row.classList.add('row');
-            for (let c = 0; c < 5; c++) {
-                const tile = document.createElement('div');
-                tile.classList.add('tile');
-                tile.id = `tile-${r * 5 + c}`;
-                row.appendChild(tile);
-            }
-            grid.appendChild(row);
-        }
-
-        // 2. Funkce pro odeslání pokusu
-        async function submitGuess() {
-            const guess = input.value.toUpperCase();
-            if (guess.length !== 5) return;
-
-            const response = await fetch("{% url 'check_guess' %}", {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': csrftoken
-                },
-                body: JSON.stringify({ guess })
-            });
-
-            const data = await response.json();
-
-            if (data.error) {
-                alert(data.error);
-                return;
-            }
-
-            // Obarvení dlaždic s mírným zpožděním (efekt postupného odkrývání)
-            data.result.forEach((status, i) => {
-                const tile = document.getElementById(`tile-${currentRow * 5 + i}`);
-                setTimeout(() => {
-                    tile.textContent = guess[i];
-                    tile.classList.add(status);
-                    tile.classList.add('flip'); // Přidáme třídu pro animaci
-                }, i * 200);
-            });
-
-            if (data.win) {
-                setTimeout(() => alert("Geniální! Vyhrál jsi! 🎉"), 1200);
-            } else if (currentRow === 5) {
-                setTimeout(() => alert("Bohužel, pokusy došly."), 1200);
-            }
-
-            currentRow++;
-            input.value = '';
-        }
-
-        // Event listenery
-        btn.addEventListener('click', submitGuess);
-        input.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') submitGuess();
-        });
+        const checkGuessUrl = "{% url 'check_guess' %}";
     </script>
+    
+    <script src="{% static 'game/script.js' %}"></script>
 </body>
 </html>
