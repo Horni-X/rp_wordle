@@ -1,0 +1,83 @@
+body {
+    background-color: #121213;
+    color: white;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    font-size: 2.5rem;
+    letter-spacing: 0.2rem;
+    margin-bottom: 20px;
+}
+
+.grid {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.row {
+    display: grid;
+    grid-template-columns: repeat(5, 60px);
+    gap: 5px;
+}
+
+.tile {
+    width: 60px;
+    height: 60px;
+    border: 2px solid #3a3a3c;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background-color 0.5s;
+}
+
+/* Barvy Wordle */
+.correct { background-color: #538d4e !important; border: none !important; }
+.present { background-color: #b59f3b !important; border: none !important; }
+.absent  { background-color: #3a3a3c !important; border: none !important; }
+
+/* Animace otočení */
+.flip {
+    transform: rotateX(360deg);
+    transition: transform 0.6s;
+}
+
+.input-area {
+    margin-top: 30px;
+}
+
+input {
+    background: transparent;
+    border: 1px solid #3a3a3c;
+    color: white;
+    padding: 10px;
+    font-size: 1.2rem;
+    text-align: center;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #818384;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-left: 5px;
+}
